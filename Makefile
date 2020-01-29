@@ -13,7 +13,7 @@ no_warnings: $(OBJS)
 	gcc -o $(EXE) $(CFLAGS) $(OBJS) $(LIBS)
 
 debug: $(OBJS)
-	gcc -0 $(EXE) $(C_DEBUG_FLAGS) $(OBJS) $(LIBS)
+	gcc -o $(EXE) $(C_DEBUG_FLAGS) $(OBJS) $(LIBS)
 
 clean :
 	rm $(EXE)
