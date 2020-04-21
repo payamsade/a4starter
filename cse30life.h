@@ -1,4 +1,4 @@
-//! cse30wi20
+//! cse30sp20
 //! cse30life functions
 //! functions to support life!
 
