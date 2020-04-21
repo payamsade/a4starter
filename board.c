@@ -1,7 +1,8 @@
 /**
  * Assignment: life
- * Section: (A, B, C)
- * Class: UCSD CSE30-wi20
+ * Name :TODO
+ * PID: TODO
+ * Class: UCSD CSE30-sp20
  *
  */
 #include "cse30life.h"
