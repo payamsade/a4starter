@@ -2,7 +2,7 @@
  * Assignment: life
  * Name:TODO
  * PID :TODO
- * Class: UCSD CSE30-sp20
+ * Class: UCSD CSE30-WI21
  *
  */
 #ifndef _BOARD_H
