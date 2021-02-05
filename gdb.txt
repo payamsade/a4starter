@@ -1,0 +1,31 @@
+[cs30wi21hz@ieng6-201]:a4gdb:352$ gdb a.out
+
+(gdb) run
+Starting program: /home/linux/ieng6/cs30wi21/cs30wi21hz/PA3/a4gdb/a.out 
+
+Program received signal SIGSEGV, Segmentation fault.
+0x00007ffff7a99de1 in __strlen_sse2 () from /lib64/libc.so.6
+Missing separate debuginfos, use: debuginfo-install glibc-2.17-317.el7.x86_64
+
+(gdb) where
+
+#0  0x00007ffff7a99de1 in __strlen_sse2 () from /lib64/libc.so.6
+#1  0x00007ffff7a7d6c2 in puts () from /lib64/libc.so.6
+#2  0x00000000004005e1 in printListFwd (curPt=0x602010) at coredump.c:45
+#3  0x0000000000400672 in main (argc=1, argv=0x7fffffffd7d8) at coredump.c:67
+
+(gdb) up
+
+#1  0x00007ffff7a7d6c2 in puts () from /lib64/libc.so.6
+
+(gdb) up
+
+#2  0x00000000004005e1 in printListFwd (curPt=0x602010) at coredump.c:45
+45	    printf("%s\n", curPt->name);
+
+(gdb) print curPt->name
+
+$1 = 0x0
+#############################################################################
+The final command prints the variable (name) from the pointer(curPt). That 
+value as 0x0 which means that we're accessing memory that doesn't belong to us or that is set up improperly. It says that the issue with our program is that we did not properly allocate the memory for the variable. We can fix the issue by allocating the proper memory for the location with a malloc.
