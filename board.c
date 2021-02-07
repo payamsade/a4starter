@@ -39,6 +39,7 @@ boards_t * createBoard(char *initFileName){
 // Attempt to open the file for reading and assign
 // the file stream to fp.
 	if ((fp = fopen(initFileName, "r")) == NULL) {
+		free(new_board);
 		return NULL;
 	}
 
@@ -51,12 +52,14 @@ boards_t * createBoard(char *initFileName){
 
 	fscanf(fp, "%d", &rowValue);
 	if (rowValue < 3) {
+		free(new_board);
 		return NULL;
 	}
 	new_board->numRows = rowValue;
 
 	fscanf(fp, "%d", &colValue);
 	if (colValue < 3) {
+		free(new_board);
 		return NULL;
 	}
 	new_board->numCols = colValue;
@@ -64,11 +67,11 @@ boards_t * createBoard(char *initFileName){
 	area = colValue * rowValue;
 
 
-	belem * bufferA =(belem*) malloc(sizeof(belem)*area);
-	belem * bufferB =(belem*) malloc(sizeof(belem)*area);
+	new_board->bufferA =(belem*) malloc(sizeof(belem)*area);
+	new_board->bufferB =(belem*) malloc(sizeof(belem)*area);
 
-	new_board->currentBuffer = bufferA;
-	new_board->nextBuffer = bufferB;
+	new_board->currentBuffer = new_board->bufferA;
+	new_board->nextBuffer = new_board->bufferB;
 	clearBoards(new_board);
 	
 
@@ -117,8 +120,14 @@ boards_t * createBoard(char *initFileName){
  * delete a board
  */
 void deleteBoard(boards_t **bptrPtr){
-	free(bptrPtr);
+
+	free((*bptrPtr)->bufferA);
+	free((*bptrPtr)->bufferB);
+	free(*bptrPtr);
 	*bptrPtr = NULL;
+
+
+	//Make sure to free all the struct components
 }
 
 /**
