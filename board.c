@@ -148,6 +148,10 @@ void clearBoards(boards_t *self){
  * swap the current and next buffers
  */
 void swapBuffers(boards_t *self){
+//	belem temp = *(self->currentBuffer);
+	//*(self->currentBuffer) = *(self->nextBuffer);
+	//*(self->nextBuffer) = temp;
+
 	self->currentBuffer = self->bufferB;
 	self->nextBuffer = self->bufferA;
 }

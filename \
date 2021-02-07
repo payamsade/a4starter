@@ -17,11 +17,9 @@ static void doRow(belem *dest, belem *srcStart, belem * srcEnd, uint32_t cols){
 
 	int reqNum;
 	int q;
-	int w;
-	w = (int16_t) cols;
 	q = 0;
 	reqNum = 0;
-	for (; q < w-1; q++) {
+	for (; q < cols-1; q++) {
 		reqNum = 0;
 
 		if ((*(srcStart-cols-1)) == 1) {
