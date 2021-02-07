@@ -75,7 +75,7 @@ static void doRow(belem *dest, belem *srcStart, belem * srcEnd, uint32_t cols){
 
 			}
 		}
-		fprintf(stderr, "loop variable = %d", q);
+		//fprintf(stderr, "loop variable = %d", q);
 	}
 }
 
