@@ -1,7 +1,7 @@
 /**
  * Assignment: life
- * Name:TODO
- * PID :TODO
+ * Name: Payam Sadeghian
+ * PID : Payam Sadeghian
  * Class: UCSD CSE30-WI21
  *
  */

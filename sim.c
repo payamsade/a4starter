@@ -16,10 +16,10 @@ extern void asm_doRow(belem *, belem *, belem *, uint32_t);
 static void doRow(belem *dest, belem *srcStart, belem * srcEnd, uint32_t cols){
 
 	int reqNum;
-	int q;
-	q = 1;
+	//uint32_t q;
+	//q = 1;
 	reqNum = 0;
-	for (; q < cols-1; q++) {
+	while (*srcStart <= *srcEnd) { // for (; q < cols-1; q++)
 		reqNum = 0;
 
 		if ((*(srcStart-cols-1)) == 1) {
@@ -50,16 +50,29 @@ static void doRow(belem *dest, belem *srcStart, belem * srcEnd, uint32_t cols){
 		//add case for alive and dead cells
 
 
-		if ( reqNum == 2 || reqNum == 3) {
-			*dest = 1;
-		}
-		else {
-			*dest = 0;
-		}
+		if( *srcStart == 1) {
 
-		dest++;
-		srcStart++;
 
+			if ( reqNum == 2 || reqNum == 3) {
+				*dest = 1;
+			}
+			else {
+				*dest = 0;
+			}
+
+			if ( *srcStart == 0) {
+				if (reqNum == 3) {
+					*dest = 1;
+				}
+				else {
+					*dest = 0;
+				}
+
+				dest++;
+				srcStart++;
+
+			}
+		}
 	}
 }
 
@@ -72,14 +85,13 @@ static void doRow(belem *dest, belem *srcStart, belem * srcEnd, uint32_t cols){
  *   swap current and next
  */
 void simLoop(boards_t *self, uint32_t steps){
-	// TODO:
 	//
 	//Can add the getIndex method
 	//
 	//write all the values beforehand.
 
-	int j;
-	int g;
+	uint32_t j;
+	uint32_t g;
 	int start;
 	int end;
 	j = 0;
@@ -97,5 +109,5 @@ void simLoop(boards_t *self, uint32_t steps){
 		}
 		swapBuffers(self);
 	}
+	self->gen = self->gen + 1;
 }
-						// make sure to switch buffers at the end of each generation.

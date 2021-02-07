@@ -122,7 +122,11 @@ boards_t * createBoard(char *initFileName){
 void deleteBoard(boards_t **bptrPtr){
 
 	free((*bptrPtr)->bufferA);
+	//(*bptrPtr)->bufferA = NULL;
 	free((*bptrPtr)->bufferB);
+	//(*bptrPtr)->bufferB = NULL;
+	//free(bptrPtr);
+	//bptrPtr = NULL;
 	free(*bptrPtr);
 	*bptrPtr = NULL;
 
