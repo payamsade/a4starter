@@ -13,67 +13,66 @@ extern void asm_doRow(belem *, belem *, belem *, uint32_t);
 /**
  * process one row of the board
  */
-static void doRow(belem *dest, belem *srcStart, belem * srcEnd, uint32_t cols){
+static void doRow(belem *dest, belem *srcStart, belem * srcEnd, uint32_t cols) {
 
 	int reqNum;
 	reqNum = 0;
+	int q = 0;
 	while(srcStart != srcEnd+1) {
 		reqNum = 0;
 
-		if ((*(srcStart-cols-1)) == 1) {
+		if (((int)*(srcStart-cols-1)) == 1) { //the value stored here is not an int right?
 			reqNum++;
 		}
-		if ((*(srcStart-cols)) == 1) {
+		if (((int)*(srcStart-cols)) == 1) {
 			reqNum++;
 		}
-		if ((*(srcStart-cols+1)) == 1) {
+		if (((int)*(srcStart-cols+1)) == 1) {
 			reqNum++;
 		}
-		if (( *(srcStart-1)) == 1) {
+		if (((int)*(srcStart-1)) == 1) {
 			reqNum++;
 		}
-		if ((*(srcStart+1)) == 1) {
+		if (((int)*(srcStart+1)) == 1) {
 			reqNum++;
 		}
-		if ((*(srcStart+cols-1)) == 1) {
+		if (((int)*(srcStart+cols-1)) == 1) {
 			reqNum++;
 		}
-		if ((*(srcStart+cols)) == 1) {
+		if (((int)*(srcStart+cols)) == 1) {
 			reqNum++;
 		}
-		if ((*(srcStart+cols+1)) == 1) {
+		if (((int)*(srcStart+cols+1)) == 1) {
 			reqNum++;
 		}
 
-		//add case for alive and dead cells
-
-
-		if( *srcStart == 1) {
+		if( (int)*srcStart == 1) {
 
 
 			if ( reqNum == 2 || reqNum == 3) {
-				*dest = 1;
+				*dest = '1';
 			}
 			else {
-				*dest = 0;
+				*dest = '0';
 			}
 		}
 
-		if ( *srcStart == 0) {
-			if (reqNum == 3) {
-				*dest = 1;
+		if ((int)*srcStart == 0) {
+			if (reqNum == '3') {
+				*dest = '1';
 			}
 			else {
-				*dest = 0;
+				*dest = '0';
 			}
 
-			dest++;
-			srcStart++;
-
 		}
-		//fprintf(stderr, "loop variable = %d", q);
+		dest++;
+		srcStart++;
+		q++;
+		printf("loop variable = %d", q);
+		printf("cell variable = %c", *srcStart);
 	}
-	//fprintf(stderr, "loop variable = %d", q);
+	//fprintf(stdout, "loop variable = %d ", q);
 }
 
 
@@ -107,7 +106,7 @@ void simLoop(boards_t *self, uint32_t steps){
 			doRow(&(self->nextBuffer[start]),&(self->currentBuffer[start]),&(self->currentBuffer[end]), self->numCols);
 		}
 		swapBuffers(self);
-		//fprintf(stderr, "loop variable = %d", g);
+		fprintf(stderr, "loop variable = %d", g);
 	}
 	self->gen = self->gen + 1;
 	//fprint(stderr, "loop variable = %d", j);

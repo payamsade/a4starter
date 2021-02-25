@@ -11,7 +11,4 @@
 
 extern void simLoop(boards_t *self, uint32_t steps); // simulation loop
 
-static void doRow(belem *dest, belem *srcStart, belem *srcEnd, uint32_t cols);
-
-void simLoop(boards_t *self, uint32_t steps);
 #endif
