@@ -19,28 +19,28 @@ static void doRow(belem *dest, belem *srcStart, belem * srcEnd, uint32_t cols) {
 	while(srcStart != srcEnd+1) {
 		reqNum = 0;
 
-		if( *(srcStart - cols - 1) == '1') { //NW
+		if( *(srcStart - cols - 1) == 1) { //NW
 			reqNum++; }
-		if( *(srcStart - cols) == '1') { //N 
+		if( *(srcStart - cols) == 1) { //N 
 			reqNum++; }
 
-		if (*(srcStart - cols + 1) == '1') { //NE
+		if (*(srcStart - cols + 1) == 1) { //NE
 			reqNum++;}
 
-		if (*(srcStart - 1) == '1') {//W
+		if (*(srcStart - 1) == 1) {//W
 			reqNum++;}
 
-		if (*(srcStart + 1) == '1') {//E
+		if (*(srcStart + 1) == 1) {//E
 			reqNum++;
 		}
 
-		if (*(srcStart + cols - 1) == '1') {//SW
+		if (*(srcStart + cols - 1) == 1) {//SW
 			reqNum++;}
 
-		if (*(srcStart + cols) == '1') {//S
+		if (*(srcStart + cols) == 1) {//S
 			reqNum++;}
 
-		if (*(srcStart + cols + 1) == '1') {//SE
+		if (*(srcStart + cols + 1) == 1) {//SE
 			reqNum++;}
 
 		//reqNum += (int) *(srcStart-cols-1);
@@ -52,23 +52,23 @@ static void doRow(belem *dest, belem *srcStart, belem * srcEnd, uint32_t cols) {
 		//reqNum += (int) *(srcStart+cols);
 		//reqNum += (int) *(srcStart+cols+1);
 
-		if(* srcStart == '1') {
+		if(* srcStart == 1) {
 
 
 			if ( reqNum == 2 || reqNum == 3) {
-				*dest = '1';
+				*dest = 1;
 			}
 			else {
-				*dest = '0';
+				*dest = 0;
 			}
 		}
 
-		if ( *srcStart == '0') {
+		if ( *srcStart == 0) {
 			if (reqNum == 3) {
-				*dest = '1';
+				*dest = 1;
 			}
 			else {
-				*dest = '0';
+				*dest = 0;
 			}
 
 		}
