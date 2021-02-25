@@ -16,12 +16,8 @@ extern void asm_doRow(belem *, belem *, belem *, uint32_t);
 static void doRow(belem *dest, belem *srcStart, belem * srcEnd, uint32_t cols){
 
 	int reqNum;
-	int q;
-	int w;
-	w = (int16_t) cols;
-	q = 0;
 	reqNum = 0;
-	for (; q < w-1; q++) {
+	while(srcStart != srcEnd+1) {
 		reqNum = 0;
 
 		if ((*(srcStart-cols-1)) == 1) {
@@ -61,22 +57,23 @@ static void doRow(belem *dest, belem *srcStart, belem * srcEnd, uint32_t cols){
 			else {
 				*dest = 0;
 			}
+		}
 
-			if ( *srcStart == 0) {
-				if (reqNum == 3) {
-					*dest = 1;
-				}
-				else {
-					*dest = 0;
-				}
-
-				*dest = *dest + 1;
-				*srcStart = *srcStart + 1;
-
+		if ( *srcStart == 0) {
+			if (reqNum == 3) {
+				*dest = 1;
 			}
+			else {
+				*dest = 0;
+			}
+
+			dest++;
+			srcStart++;
+
 		}
 		//fprintf(stderr, "loop variable = %d", q);
 	}
+	//fprintf(stderr, "loop variable = %d", q);
 }
 
 
@@ -101,14 +98,13 @@ void simLoop(boards_t *self, uint32_t steps){
 	g = 1;
 	start = 0;
 	end = 0;
+	uint32_t w = self->numRows;
+	uint32_t columns = self->numCols;
 	for (; j < steps; j++) {
-
-
-
-		for(; g < self->numRows-1; g++) {
+		for(; g < w-1; g++) {
 			start = getIndex(self, 1, g);
-			end = getIndex(self, self->numCols-1, g);
-			doRow(&(self->nextBuffer[start]),&(self->currentBuffer[start]), &(self->currentBuffer[end]), self->numCols);
+			end = getIndex(self, columns-1, g);
+			doRow(&(self->nextBuffer[start]),&(self->currentBuffer[start]),&(self->currentBuffer[end]), self->numCols);
 		}
 		swapBuffers(self);
 		//fprintf(stderr, "loop variable = %d", g);
